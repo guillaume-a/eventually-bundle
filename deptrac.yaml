@@ -1,0 +1,39 @@
+deptrac:
+    paths:
+        - ./src
+    layers:
+        -
+            name: Bundle
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^Codr\\Eventually\\Bundle\\#'
+        -
+            name: Core
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^Codr\\Eventually\\(Domain|Application)\\#'
+        -
+            name: Adapter
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^Codr\\Eventually\\Doctrine\\#'
+        -
+            name: Vendors
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^(Symfony|Doctrine|Psr|Composer)\\#'
+        -
+            name: Forbidden
+            collectors:
+                -
+                    type: classNameRegex
+                    value: '#^(?!(Codr\\Eventually|Symfony|Doctrine|Psr|Composer)\\)[A-Za-z0-9_]+\\#'
+    ruleset:
+        Bundle:
+            - Core
+            - Adapter
+            - Vendors

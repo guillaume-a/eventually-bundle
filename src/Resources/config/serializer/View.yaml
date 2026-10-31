@@ -1,0 +1,6 @@
+Codr\Eventually\Application\View\View:
+    attributes:
+        position: { ignore: true }
+        deletedAt: { ignore: true }
+        createdAt: { ignore: true }
+        updatedAt: { ignore: true }

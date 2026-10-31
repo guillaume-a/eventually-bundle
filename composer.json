@@ -1,0 +1,79 @@
+{
+    "name": "codr/eventually-bundle",
+    "description": "Symfony bundle for codr/eventually: Messenger buses, command metadata, conflict retry, event publication and read model rebuild on the Doctrine adapter.",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "keywords": ["event-sourcing", "cqrs", "symfony", "bundle", "messenger"],
+    "authors": [
+        {
+            "name": "Guillaume Aveline",
+            "email": "917449+guillaume-a@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:guillaume-a/eventually.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:guillaume-a/eventually-doctrine.git"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "composer-runtime-api": "^2",
+        "codr/eventually": "@dev",
+        "codr/eventually-doctrine": "@dev",
+        "doctrine/doctrine-bundle": "^3.3.4",
+        "doctrine/orm": "^3.7.6",
+        "symfony/console": "^8.1",
+        "symfony/framework-bundle": "^8.1",
+        "symfony/messenger": "^8.1",
+        "symfony/property-access": "^8.1",
+        "symfony/property-info": "^8.1",
+        "symfony/serializer": "^8.1",
+        "symfony/validator": "^8.1"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^4.7.2",
+        "friendsofphp/php-cs-fixer": ">=3.95.27",
+        "phpstan/phpstan": ">=2.3.4",
+        "phpunit/phpunit": "^12.5.42"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codr\\Eventually\\Bundle\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codr\\Eventually\\Bundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "deptrac": "deptrac analyse",
+        "test": "phpunit",
+        "check": [
+            "@composer validate",
+            "@phpstan",
+            "@cs-fix",
+            "@deptrac",
+            "@test"
+        ]
+    }
+}
