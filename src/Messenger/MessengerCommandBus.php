@@ -4,6 +4,7 @@ namespace Codr\Eventually\Bundle\Messenger;
 
 use Codr\Eventually\Application\Bus\CommandBusInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -21,6 +22,8 @@ final class MessengerCommandBus implements CommandBusInterface
     {
         try {
             return $this->handle($command);
+        } catch (ValidationFailedException $exception) {
+            throw DetailedValidationFailedException::from($exception);
         } catch (HandlerFailedException $exception) {
             throw $exception->getPrevious() ?? $exception;
         }
